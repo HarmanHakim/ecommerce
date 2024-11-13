@@ -1,3 +1,4 @@
+TUGAS 7
 1. Jelaskan apa yang dimaksud dengan  StatelessWidget  dan  StatefulWidget , dan jelaskan perbedaan dari keduanya.
 
 Dalam Flutter,  widget  adalah elemen antarmuka pengguna yang dapat digunakan kembali dan bersifat modular. Flutter menyediakan dua jenis widget utama:
@@ -37,7 +38,7 @@ Dalam Flutter,  widget  adalah elemen antarmuka pengguna yang dapat digunakan ke
 
 3. Apa fungsi dari  setState() ? Jelaskan variabel apa saja yang dapat terdampak dengan fungsi tersebut.
 
- setState()  adalah metode dalam  StatefulWidget  yang digunakan untuk memperbarui atau mengubah tampilan ketika ada perubahan pada  state . Ketika  setState()  dipanggil, Flutter akan menandai widget tersebut sebagai perlu di- render  ulang, sehingga tampilan yang baru akan mencerminkan perubahan yang terjadi pada variabel yang ada di dalamnya.
+ setState()  adalah metode dalam  StatefulWidget  yang digunakan untuk memperbarui atau mengubah tampilan ketika ada perubahan pada  state . Ketika  setState()  dipanggil, Flutter akan menkitai widget tersebut sebagai perlu di- render  ulang, sehingga tampilan yang baru akan mencerminkan perubahan yang terjadi pada variabel yang ada di dalamnya.
 
 Fungsi utama dari  setState()  adalah:
 - Memberi tahu Flutter bahwa ada perubahan pada data yang memengaruhi UI, sehingga tampilan widget perlu diperbarui.
@@ -76,3 +77,87 @@ Saya memulai proyek ini dengan membuka terminal dan menjalankan perintah `flutte
 Saya menambahkan widget `InfoCard` untuk menampilkan informasi pengguna seperti NPM, nama, dan kelas. Tombol-tombol seperti "Lihat Daftar Produk", "Tambah Produk", dan "Keluar" dibuat menggunakan `ElevatedButton.icon`, dengan ikon dan warna yang berbeda. Dengan membungkus tombol dalam `InkWell` dan `ScaffoldMessenger`, setiap tombol dalam `ItemCard` akan menampilkan `Snackbar` ketika ditekan. Dengan `GridView.count`, tata letak tombol ditampilkan dalam bentuk grid, yang memberikan tampilan lebih rapi dan profesional.
 
 Saya menggunakan `const` untuk nilai tetap, dan `final` untuk variabel seperti `npm`, `name`, dan `className`, yang diinisialisasi sekali tetapi bisa berubah selama runtime. Terakhir, saya memastikan proyek berjalan lancar dengan memeriksa menggunakan `Flutter Analysis` dan `Flutter Run`.
+
+
+
+
+TUGAS 8
+1. Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+const digunakan untuk membuat objek yang bersifat immutable atau tidak dapat diubah setelah diinisialisasi. Saat kita menggunakan const, Flutter hanya membuat satu instance dari objek tersebut, sehingga menghemat memori dan meningkatkan efisiensi aplikasi.
+
+- Keuntungan Menggunakan const
+    - Penghematan Memori: Menggunakan const memungkinkan Flutter untuk membuat objek hanya satu kali dan menggunakannya kembali saat diperlukan. Ini menghemat memori dan mengurangi beban garbage collector.
+    - Meningkatkan Performa: Karena objek const tidak berubah, Flutter tidak perlu merender ulang objek ini jika tidak ada perubahan, yang dapat mempercepat aplikasi.
+    - Menjaga Konsistensi: Dengan const, kita menghindari perubahan yang tidak disengaja pada nilai yang seharusnya tetap, membantu menjaga integritas data.
+- Kapan Menggunakan const?
+    - Untuk Nilai yang Tidak Berubah: Gunakan const untuk objek yang tidak perlu berubah selama lifecycle aplikasi.
+    - Optimisasi UI: Saat menggunakan widget statis, seperti Text, Icon, atau Container, yang tidak berubah, menggunakan const dapat mengoptimalkan kinerja.
+- Kapan Sebaiknya Tidak Menggunakan const?
+    - Jika Data Dinamis: Jika nilai atau widget dapat berubah selama aplikasi berjalan, seperti input pengguna atau data dari server, tidak perlu menggunakan const.
+    - Animasi atau Respons Interaktif: Untuk widget yang beranimasi atau responsif, jangan gunakan const, karena memerlukan rendering ulang sesuai perubahan.
+
+
+2. Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+  Row:
+    - Row digunakan untuk menyusun widget secara horizontal (dari kiri ke kanan).
+    - Elemen-elemen di dalam Row akan ditempatkan secara berurutan dalam satu baris.
+    - Jika elemen-elemen melebihi lebar layar, Anda bisa menggunakan Expanded atau Flexible untuk mengatur ukuran dan ruang yang tersedia.
+    - MainAxisAlignment digunakan untuk mengatur posisi elemen-elemen pada sumbu utama (horizontal).
+    - CrossAxisAlignment digunakan untuk mengatur posisi elemen pada sumbu silang (vertikal).
+    - Contoh 
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Icon(Icons.home),
+        Icon(Icons.search),
+        Icon(Icons.notifications),
+      ],
+    )
+
+
+  Column:
+  - Column digunakan untuk menyusun widget secara vertikal (dari atas ke bawah).
+  - Elemen-elemen di dalam Column akan ditempatkan secara berurutan dalam satu kolom.
+  - Jika elemen-elemen melebihi tinggi layar, Anda bisa menggunakan Expanded atau Flexible untuk mengatur ukuran dan ruang yang tersedia.
+  - MainAxisAlignment digunakan untuk mengatur posisi elemen-elemen pada sumbu utama (vertikal).
+  - CrossAxisAlignment digunakan untuk mengatur posisi elemen pada sumbu silang (horizontal).
+  - Contoh
+  Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Text("Hello, world!"),
+      ElevatedButton(
+        onPressed: () {},
+        child: Text("Press me"),
+      ),
+      Icon(Icons.favorite),
+    ],
+  )
+
+
+
+3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+
+Elemen input yang digunakan pada halaman form ini adalah sebagai berikut:
+  - TextFormField untuk "Name": Digunakan untuk menerima masukan nama produk, dilengkapi dengan validasi agar tidak boleh kosong.
+  - TextFormField untuk "Amount": Berfungsi untuk menerima input berupa jumlah atau kuantitas yang harus berupa nilai integer.
+  - TextFormField untuk "Description": Menyediakan input deskripsi lengkap dengan validasi agar sesuai ketentuan.
+
+Sementara itu, ada beberapa elemen input lain dalam Flutter yang tidak digunakan dalam tugas ini, yaitu:
+
+- Checkbox: Untuk pilihan sederhana antara “ya” atau “tidak.”
+- Radio Button: Memungkinkan pemilihan satu opsi dari beberapa pilihan yang disediakan.
+- DropdownButton: Menyediakan pilihan dalam bentuk menu dropdown.
+- Slider: Memungkinkan pengguna memilih nilai dalam rentang tertentu.
+- Switch: Memberikan opsi hidup atau mati untuk pengaturan tertentu.
+- DatePicker dan TimePicker: Memungkinkan pengguna memilih tanggal atau waktu tertentu.
+
+
+
+4. Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Untuk menjaga konsistensi tampilan tema pada aplikasi Flutter, saya dapat menggunakan ThemeData yang diterapkan melalui MaterialApp. Dengan ThemeData, saya bisa mengatur berbagai elemen seperti warna, jenis font, ukuran teks, serta komponen UI lainnya, sehingga keseluruhan tampilan aplikasi menjadi lebih seragam dan konsisten.
+
+
+
+5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Navigasi dalam aplikasi Flutter yang memiliki banyak halaman bisa diatur menggunakan  Navigator  dengan metode seperti  push(), pop(), dan  pushReplacement(). Untuk struktur navigasi yang lebih rapi, kita dapat memanfaatkan  Named Route  yang didefinisikan dalam  MaterialApp . Agar akses antar halaman lebih mudah, kita juga bisa menambahkan  Drawer  atau  Bottom Navigation.
