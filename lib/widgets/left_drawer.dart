@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:ecommerce/screens/list_product.dart';
 import 'package:ecommerce/screens/menu.dart';
 import 'package:ecommerce/screens/productentry_form.dart';
+import 'package:flutter/material.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -17,7 +18,7 @@ class LeftDrawer extends StatelessWidget {
             child: const Column(
               children: [
                 Text(
-                  'Mental Health Tracker',
+                  'ecommerce',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -27,7 +28,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 Text(
-                  "Ayo jaga kesehatan mentalmu setiap hari disini!",
+                  "Toko hebat",
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -45,19 +46,31 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MyHomePage(),
+                    builder: (context) => const MyHomePage(),
                   ));
             },
           ),
           ListTile(
-            leading: const Icon(Icons.ac_unit_sharp),
+            leading: const Icon(Icons.add),
             title: const Text('Tambah Product'),
-            // Bagian redirection ke ProductEntryFormPage
+            // Bagian redirection ke MoodEntryFormPage
             onTap: () {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const productEntryFormPage(),
+                    builder: (context) => const ProductEntryFormPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add),
+            title: const Text('List Product'),
+            // Bagian redirection ke MoodEntryFormPage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProductListPage(),
                   ));
             },
           ),

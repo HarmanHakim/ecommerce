@@ -137,14 +137,12 @@ const digunakan untuk membuat objek yang bersifat immutable atau tidak dapat diu
 
 
 3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
-
 Elemen input yang digunakan pada halaman form ini adalah sebagai berikut:
   - TextFormField untuk "Name": Digunakan untuk menerima masukan nama produk, dilengkapi dengan validasi agar tidak boleh kosong.
   - TextFormField untuk "Amount": Berfungsi untuk menerima input berupa jumlah atau kuantitas yang harus berupa nilai integer.
   - TextFormField untuk "Description": Menyediakan input deskripsi lengkap dengan validasi agar sesuai ketentuan.
 
 Sementara itu, ada beberapa elemen input lain dalam Flutter yang tidak digunakan dalam tugas ini, yaitu:
-
 - Checkbox: Untuk pilihan sederhana antara “ya” atau “tidak.”
 - Radio Button: Memungkinkan pemilihan satu opsi dari beberapa pilihan yang disediakan.
 - DropdownButton: Menyediakan pilihan dalam bentuk menu dropdown.
@@ -161,3 +159,129 @@ Untuk menjaga konsistensi tampilan tema pada aplikasi Flutter, saya dapat menggu
 
 5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
 Navigasi dalam aplikasi Flutter yang memiliki banyak halaman bisa diatur menggunakan  Navigator  dengan metode seperti  push(), pop(), dan  pushReplacement(). Untuk struktur navigasi yang lebih rapi, kita dapat memanfaatkan  Named Route  yang didefinisikan dalam  MaterialApp . Agar akses antar halaman lebih mudah, kita juga bisa menambahkan  Drawer  atau  Bottom Navigation.
+
+
+
+
+TUGAS 9
+1. Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?
+Membuat model untuk pengambilan atau pengiriman data JSON penting untuk:
+  - Struktur Data yang Jelas: Model memastikan data memiliki struktur yang konsisten. Ini membantu dalam memvalidasi apakah data JSON sesuai dengan format yang diharapkan.
+  - Pengelolaan Data yang Mudah: Model menyediakan cara yang terorganisir untuk mengelola data, sehingga mempermudah parsing, manipulasi, atau penyimpanan.
+  - Efisiensi Kode: Dengan model, pengembang tidak perlu menulis kode berulang untuk memetakan data JSON menjadi objek atau variabel.
+  - Keamanan: Model meminimalkan risiko kesalahan parsing data atau kerentanan terhadap data yang tidak sesuai.
+
+Jika tidak membuat model terlebih dahulu, mungkin tidak langsung terjadi error, tetapi:
+  - Data bisa salah diproses karena struktur yang tidak sesuai.
+  - Debugging menjadi sulit ketika data JSON berubah.
+  - Risiko runtime error meningkat karena kode tidak siap menangani struktur data yang berubah.
+
+
+
+2. Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini
+  - Melakukan HTTP Request: Mengirim request (GET, POST, PUT, DELETE) ke server.
+  - Mengambil Data dari API: Mendapatkan respons dalam bentuk JSON atau format lain.
+
+
+
+3. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+  - Menyimpan Cookie: Agar aplikasi Flutter dapat mengirimkan permintaan HTTP yang autentik, cookie diperlukan untuk menjaga status sesi pengguna.
+  - Autentikasi: Saat login berhasil, server mengirimkan cookie yang digunakan untuk mengidentifikasi sesi pengguna.
+  - Keberlanjutan Sesi: Dengan menyimpan cookie, pengguna tidak perlu login ulang setiap kali aplikasi diakses.
+
+  Mengapa CookieRequest perlu dibagikan ke semua komponen?
+  - Untuk menjaga state aplikasi, seperti apakah pengguna sudah login atau belum.
+  - Komponen-komponen aplikasi yang memerlukan akses ke endpoint server dapat menggunakan cookie yang sama untuk menjaga sesi.
+  - Mencegah inkonsistensi antara komponen terkait autentikasi dan pengambilan data.
+
+
+
+4. Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
+  - Input Data: Pengguna memasukkan data melalui UI Flutter (misalnya form).
+  - Validasi Input: Flutter memvalidasi data input (seperti format email atau panjang password).
+  - Kirim Data ke Server:
+    - Data input diubah menjadi format JSON.
+    - Flutter mengirim data ke server melalui HTTP request (biasanya POST).
+  - Proses di Server:
+    - Server menerima data JSON.
+    - Data diproses sesuai kebutuhan (misalnya disimpan di database).
+  - Respon dari Server:
+    - Server mengirimkan respon (berupa JSON) kembali ke Flutter, seperti status keberhasilan atau data yang diambil.
+  - Parsing Data:
+    - Flutter mem-parsing data JSON menjadi objek Dart menggunakan model.
+  - Menampilkan Data:
+    - Data yang diparsing ditampilkan pada UI Flutter.
+
+
+
+5. Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+  Login
+    Input Data:
+      - Pengguna memasukkan email dan password pada form login di Flutter.
+      Kirim ke Server:
+      - Flutter mengirim data ke endpoint login Django menggunakan HTTP POST.
+    Proses oleh Django:
+      - Django memeriksa kredensial terhadap database.
+      - Jika valid, Django mengirimkan token atau session cookie ke Flutter.
+    Simpan Status Login:
+      - Flutter menyimpan cookie atau token menggunakan CookieRequest atau secure storage.
+      Tampilkan Menu:
+      - Jika login berhasil, Flutter menampilkan halaman menu utama.
+  Register
+    Input Data:
+      - Pengguna mengisi form pendaftaran.
+      Kirim ke Server:
+      - Flutter mengirim data seperti username, email, dan password ke endpoint register Django.
+    Proses oleh Django:
+      - Django memvalidasi data, membuat akun baru, dan menyimpan data ke database.
+      - Django mengirimkan respon ke Flutter (misalnya, "Registrasi berhasil").
+    Tampilkan Status:
+      - Flutter menampilkan notifikasi keberhasilan atau error.
+  Logout
+    Pengguna Menekan Tombol Logout:
+      - Flutter mengirim permintaan logout ke server.
+    Proses oleh Django:
+      - Django menghapus session cookie atau token di sisi server.
+      Hapus Data Login di Flutter:
+      - Flutter menghapus cookie atau token yang tersimpan.
+      Redirect ke Login:
+      - Flutter mengarahkan pengguna kembali ke halaman login.
+    Alur Keseluruhan:
+      - Login: Input → Validasi di Django → Sesi terbentuk → Menu tampil.
+      - Register: Input → Validasi → Simpan data di database → Notifikasi berhasil.
+      - Logout: Kirim permintaan → Sesi dihapus → Redirect ke login.
+
+
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+  Mengimplementasikan fitur registrasi akun pada proyek tugas Flutter.
+    - Membuat view baru di project django
+    - Membuat stateful page 
+    - Membuat form yang berisi input username, password, dan konfirmasi password
+    - Membuat logic button registrasi
+    - Jika registrasi berhasil maka pengguna akan diarahkan ke login page
+  
+  Membuat halaman login pada proyek tugas Flutter.
+    - Membuat view baru di Project Django
+    - Membuat stateful page pada umumnya
+    - Membuat form yang berisi username dan password
+    - Membuat logic button login
+
+  Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+    - Membuat view login, logout, dan registrasi
+    - Memanggil endpoints melalui request di Flutter
+    - Memproses output JSON
+
+  Membuat model kustom sesuai dengan proyek aplikasi Django.
+    - Mengecek konten dari localhost:8000/json
+    - Menggenerate model dart dengan bantuan website Quicktype
+    - Membuat file baru bernama product_entry.dart untuk meletakan model yang telah digenerate sebelumnya
+
+  Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
+    - Membuat page stateful pada umumnya
+    - Membuat function untuk melakukan fetching json:
+    - Menggunakan Future Builder pada body dari Scaffold
+
+  Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+    - Membuat sebuah stateful page pada umumnya
+    - Menyatakan variabel-variabel yang menjadi atribut dari page detail (misalnya Uuid, price, description, dll)
+    - Menggunakan atribut untuk ditampilkan pada halaman detail
